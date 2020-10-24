@@ -175,8 +175,8 @@ stages:
       args: '--no-latest'
   
   
-    - template: .azure/azp-template-python.yml
-      parameters:
-        name: '39_Alpine312'
-        version: '3.9=3.12'
-        args: '--release-tag'      
+  - template: .azure/azp-template-python.yml
+    parameters:
+      name: '39_Alpine312'
+      version: '3.9=3.12'
+      args: '--release-tag'      
