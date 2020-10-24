@@ -166,13 +166,14 @@ stages:
       version: '3.8=3.12'
       args: '--release-tag --no-latest'
 
+
   - template: .azure/azp-template-python.yml
     parameters:
       name: '39_Alpine311'
       version: '3.9=3.11'
       args: '--no-latest'
-  
-  
+
+
   - template: .azure/azp-template-python.yml
     parameters:
       name: '39_Alpine312'
