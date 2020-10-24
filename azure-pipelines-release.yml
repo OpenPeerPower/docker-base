@@ -140,19 +140,17 @@ stages:
   dependsOn:
   - Alpine
   jobs:
-
   - template: .azure/azp-template-python.yml
     parameters:
       name: '37_Alpine311'
       version: '3.7=3.11'
       args: '--no-latest'
 
-
   - template: .azure/azp-template-python.yml
     parameters:
       name: '37_Alpine312'
       version: '3.7=3.12'
-      args: '--release-tag --no-latest'
+      args: '--no-latest --release-tag'
 
 
   - template: .azure/azp-template-python.yml
@@ -166,7 +164,7 @@ stages:
     parameters:
       name: '38_Alpine312'
       version: '3.8=3.12'
-      args: '--release-tag'
+      args: '--release-tag --no-latest'
 
   - template: .azure/azp-template-python.yml
     parameters:
@@ -179,4 +177,4 @@ stages:
     parameters:
       name: '39_Alpine312'
       version: '3.9=3.12'
-      args: '--release-tag'      
+      args: '--release-tag'
