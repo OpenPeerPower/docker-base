@@ -11,7 +11,7 @@ ENV \
 SHELL ["/bin/ash", "-o", "pipefail", "-c"]
 
 # Version
-ARG BASHIO_VERSION=0.9.0
+ARG BASHIO_VERSION=0.0.1
 ARG S6_OVERLAY_VERSION=2.1.0.2
 ARG JEMALLOC_VERSION=5.2.1
 
@@ -41,7 +41,7 @@ RUN apk add --no-cache \
     && make install \
     \
     && mkdir -p /usr/src/bashio \
-    && curl -L -s "https://github.com/oppio-addons/bashio/archive/v${BASHIO_VERSION}.tar.gz" \
+    && curl -L -s "https://github.com/oppio-addons/archive/v${BASHIO_VERSION}.tar.gz" \
         | tar -xzf - --strip 1 -C /usr/src/bashio \
     && mv /usr/src/bashio/lib /usr/lib/bashio \
     && ln -s /usr/lib/bashio/bashio /usr/bin/bashio \

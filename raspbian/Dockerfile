@@ -16,7 +16,7 @@ ENV \
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
 # Base system
-ARG BASHIO_VERSION=0.9.0
+ARG BASHIO_VERSION=0.0.1
 ARG S6_OVERLAY_VERSION=2.1.0.2
 RUN apt-get update && apt-get install -y --no-install-recommends \
         bash \
@@ -32,7 +32,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && mkdir -p /etc/services.d \
     \
     && mkdir -p /tmp/bashio \
-    && curl -L -s https://github.com/oppio-addons/bashio/archive/v${BASHIO_VERSION}.tar.gz | tar -xzf - --strip 1 -C /tmp/bashio \
+    && curl -L -s https://github.com/oppio-addons/archive/v${BASHIO_VERSION}.tar.gz | tar -xzf - --strip 1 -C /tmp/bashio \
     && mv /tmp/bashio/lib /usr/lib/bashio \
     && ln -s /usr/lib/bashio/bashio /usr/bin/bashio \
     && rm -rf /tmp/bashio
