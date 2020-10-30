@@ -41,7 +41,7 @@ RUN apk add --no-cache \
     && make install \
     \
     && mkdir -p /usr/src/bashio \
-    && curl -L -s "https://github.com/bashio/archive/v${BASHIO_VERSION}.tar.gz" \
+    && curl -L -s "https://github.com/OpenPeerPower/bashio/archive/v${BASHIO_VERSION}.tar.gz" \
         | tar -xzf - --strip 1 -C /usr/src/bashio \
     && mv /usr/src/bashio/lib /usr/lib/bashio \
     && ln -s /usr/lib/bashio/bashio /usr/bin/bashio \
