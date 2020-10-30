@@ -14,7 +14,7 @@ ENV \
 SHELL ["/bin/ash", "-o", "pipefail", "-c"]
 
 # Version
-ARG BASHIO_VERSION=0.0.1
+ARG BASHIO_VERSION=0.0.2
 ARG S6_OVERLAY_VERSION=2.1.0.2
 ARG JEMALLOC_VERSION=5.2.1
 

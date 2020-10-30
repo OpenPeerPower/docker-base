@@ -14,7 +14,7 @@ ENV \
 SHELL ["/bin/ash", "-o", "pipefail", "-c"]
 
 # Version
-ARG BASHIO_VERSION=0.0.1
+ARG BASHIO_VERSION=0.0.2
 ARG S6_OVERLAY_VERSION=2.1.0.2
 ARG JEMALLOC_VERSION=5.2.1
 
@@ -48,7 +48,7 @@ RUN apk add --no-cache \
         | tar -xzf - --strip 1 -C /usr/src/bashio \
     && mv /usr/src/bashio/lib /usr/lib/bashio \
     && ln -s /usr/lib/bashio/bashio /usr/bin/bashio \
-    \
+    \   
     && apk del .build-deps \
     && rm -rf /usr/src/*
 
