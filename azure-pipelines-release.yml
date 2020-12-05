@@ -8,7 +8,7 @@ pr: none
 
 variables:
   - name: versionBuilder
-    value: '1.0'
+    value: 'v1.0'
   - group: docker
 
 stages:
