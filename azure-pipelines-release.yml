@@ -45,10 +45,6 @@ stages:
       vmImage: 'ubuntu-latest'
     strategy:
       matrix:
-        trusty:
-          buildVersion: '14.04'
-          buildArch: '--amd64 --i386 --armv7 --aarch64'
-          buildLatest: '--no-latest'
         xenial:
           buildVersion: '16.04'
           buildArch: '--amd64 --i386 --armv7 --aarch64'
