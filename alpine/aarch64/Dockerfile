@@ -48,7 +48,7 @@ RUN apk add --no-cache \
         | tar -xzf - --strip 1 -C /usr/src/bashio \
     && mv /usr/src/bashio/lib /usr/lib/bashio \
     && ln -s /usr/lib/bashio/bashio /usr/bin/bashio \
-    \   
+    \
     && apk del .build-deps \
     && rm -rf /usr/src/*
 
