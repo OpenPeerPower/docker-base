@@ -31,12 +31,12 @@ RUN apk add --no-cache \
     && apk add --no-cache --virtual .build-deps \
         build-base \
     \
-    && curl -L -s "https://github.com/just-containers/s6-overlay/releases/download/v${S6_OVERLAY_VERSION}/s6-overlay-aarch64.tar.gz" \
+    && curl -L -f -s "https://github.com/just-containers/s6-overlay/releases/download/v${S6_OVERLAY_VERSION}/s6-overlay-aarch64.tar.gz" \
         | tar zxvf - -C / \
     && mkdir -p /etc/fix-attrs.d \
     && mkdir -p /etc/services.d \
     \
-    && curl -L -s "https://github.com/jemalloc/jemalloc/releases/download/${JEMALLOC_VERSION}/jemalloc-${JEMALLOC_VERSION}.tar.bz2" \
+    && curl -L -f -s "https://github.com/jemalloc/jemalloc/releases/download/${JEMALLOC_VERSION}/jemalloc-${JEMALLOC_VERSION}.tar.bz2" \
         | tar -xjf - -C /usr/src \
     && cd /usr/src/jemalloc-${JEMALLOC_VERSION} \
     && ./configure \
@@ -44,7 +44,7 @@ RUN apk add --no-cache \
     && make install \
     \
     && mkdir -p /usr/src/bashio \
-    && curl -L -s "https://github.com/OpenPeerPower/bashio/archive/v${BASHIO_VERSION}.tar.gz" \
+    && curl -L -f -s "https://github.com/OpenPeerPower/bashio/archive/v${BASHIO_VERSION}.tar.gz" \
         | tar -xzf - --strip 1 -C /usr/src/bashio \
     && mv /usr/src/bashio/lib /usr/lib/bashio \
     && ln -s /usr/lib/bashio/bashio /usr/bin/bashio \
