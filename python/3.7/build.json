@@ -1,0 +1,20 @@
+{
+    "image": "openpeerpower/{arch}-base-python",
+    "shadow_repository": "ghcr.io/open-peer-power",
+    "build_from": {
+        "aarch64": "openpeerpower/aarch64-base:",
+        "armv7": "openpeerpower/armv7-base:",
+        "armhf": "openpeerpower/armhf-base:",
+        "amd64": "openpeerpower/amd64-base:",
+        "i386": "openpeerpower/i386-base:"
+    },
+    "args": {
+        "PYTHON_VERSION": "3.7.11",
+        "PIP_VERSION": "20.2.4",
+        "GPG_KEY": "0D96DF4D4110E5C43FBFB17F2D347EA6AA65421D"
+    },
+    "labels": {
+        "io.opp.base.name": "python",
+        "org.opencontainers.image.source": "https://github.com/openpeerpower/docker-base"
+    }
+}

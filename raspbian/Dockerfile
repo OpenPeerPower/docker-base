@@ -1,8 +1,7 @@
 ARG BUILD_FROM
-FROM tianon/raspbian:${BUILD_FROM}-slim
+# armhf: tianon/raspbian:${VERSION}-slim
 
-# QEMU for crossbuilds
-COPY qemu-arm-static /usr/bin/qemu-arm-static
+FROM ${BUILD_FROM}
 
 # Default ENV
 ENV \
@@ -15,27 +14,42 @@ ENV \
 # Set shell
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
+# Version
+ARG \
+    BASHIO_VERSION \
+    TEMPIO_VERSION \
+    S6_OVERLAY_VERSION
+
 # Base system
-ARG BASHIO_VERSION=0.0.2
-ARG S6_OVERLAY_VERSION=2.1.0.2
-RUN apt-get update && apt-get install -y --no-install-recommends \
+WORKDIR /usr/src
+
+RUN \
+    set -x \
+    && apt-get update && apt-get install -y --no-install-recommends \
         bash \
         jq \
         tzdata \
         curl \
         ca-certificates \
-    && rm -rf /var/lib/apt/lists/* \
     \
     && curl -L -f -s "https://github.com/just-containers/s6-overlay/releases/download/v${S6_OVERLAY_VERSION}/s6-overlay-armhf.tar.gz" \
         | tar zxvf - -C / \
     && mkdir -p /etc/fix-attrs.d \
     && mkdir -p /etc/services.d \
     \
-    && mkdir -p /tmp/bashio \
-    && curl -L -f -s https://github.com/OpenPeerPower/bashio/archive/v${BASHIO_VERSION}.tar.gz | tar -xzf - --strip 1 -C /tmp/bashio \
-    && mv /tmp/bashio/lib /usr/lib/bashio \
+    && curl -L -f -s -o /usr/bin/tempio \
+        "https://github.com/openpeerpower/tempio/releases/download/${TEMPIO_VERSION}/tempio_armhf" \
+    && chmod a+x /usr/bin/tempio \
+    \
+    && mkdir -p /usr/src/bashio \
+    && curl -L -f -s "https://github.com/oppio-addons/bashio/archive/v${BASHIO_VERSION}.tar.gz" \
+        | tar -xzf - --strip 1 -C /usr/src/bashio \
+    && mv /usr/src/bashio/lib /usr/lib/bashio \
     && ln -s /usr/lib/bashio/bashio /usr/bin/bashio \
-    && rm -rf /tmp/bashio
+    \
+    && rm -rf /var/lib/apt/lists/* \
+    && rm -rf /usr/src/*
 
 # S6-Overlay
+WORKDIR /
 ENTRYPOINT ["/init"]

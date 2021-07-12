@@ -1,0 +1,21 @@
+{
+    "image": "openpeerpower/{arch}-base",
+    "shadow_repository": "ghcr.io/open-peer-power",
+    "build_from": {
+        "aarch64": "arm64v8/alpine:",
+        "armv7": "arm32v7/alpine:",
+        "armhf": "arm32v6/alpine:",
+        "amd64": "alpine:",
+        "i386": "i386/alpine:"
+    },
+    "args": {
+        "BASHIO_VERSION": "0.13.1",
+        "TEMPIO_VERSION": "2021.05.0",
+        "S6_OVERLAY_VERSION": "2.1.0.2",
+        "JEMALLOC_VERSION": "5.2.1"
+    },
+    "labels": {
+        "io.opp.base.name": "alpine",
+        "org.opencontainers.image.source": "https://github.com/openpeerpower/docker-base"
+    }
+}

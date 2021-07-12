@@ -1,0 +1,18 @@
+{
+    "image": "openpeerpower/{arch}-base-ubuntu",
+    "shadow_repository": "ghcr.io/open-peer-power",
+    "build_from": {
+        "aarch64": "arm64v8/ubuntu:",
+        "armv7": "arm32v7/ubuntu:",
+        "amd64": "ubuntu:"
+    },
+    "args": {
+        "BASHIO_VERSION": "0.13.1",
+        "TEMPIO_VERSION": "2021.05.0",
+        "S6_OVERLAY_VERSION": "2.1.0.2"
+    },
+    "labels": {
+        "io.opp.base.name": "ubuntu",
+        "org.opencontainers.image.source": "https://github.com/openpeerpower/docker-base"
+    }
+}

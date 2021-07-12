@@ -1,21 +1,20 @@
 ARG BUILD_FROM
 FROM $BUILD_FROM
 
+ARG \
+    PYTHON_VERSION \
+    PIP_VERSION \
+    GPG_KEY
+
 # ensure local python is preferred over distribution python
 ENV PATH /usr/local/bin:$PATH
 
 # Set shell
 SHELL ["/bin/ash", "-o", "pipefail", "-c"]
 
-# install ca-certificates so that HTTPS works consistently
-# the other runtime dependencies for Python are installed later
-RUN apk add --no-cache ca-certificates
-
-ENV GPG_KEY 0D96DF4D4110E5C43FBFB17F2D347EA6AA65421D
-ENV PYTHON_VERSION 3.7.9
-
 COPY *.patch /usr/src/
 RUN set -ex \
+    && export PYTHON_VERSION=${PYTHON_VERSION} \
     && apk add --no-cache --virtual .fetch-deps \
         gnupg \
         openssl \
@@ -26,7 +25,7 @@ RUN set -ex \
     && curl -L -o python.tar.xz.asc "https://www.python.org/ftp/python/${PYTHON_VERSION%%[a-z]*}/Python-$PYTHON_VERSION.tar.xz.asc" \
     && export GNUPGHOME="$(mktemp -d)" \
     && echo "disable-ipv6" >> "$GNUPGHOME/dirmngr.conf" \
-    && gpg --batch --keyserver ha.pool.sks-keyservers.net --recv-keys "$GPG_KEY" \
+    && gpg --batch --keyserver hkps://keys.openpgp.org --recv-keys "${GPG_KEY}" \
     && gpg --batch --verify python.tar.xz.asc python.tar.xz \
     && { command -v gpgconf > /dev/null && gpgconf --kill all || :; } \
     && rm -rf "$GNUPGHOME" python.tar.xz.asc \
@@ -79,7 +78,7 @@ RUN set -ex \
         --without-ensurepip \
     && make -j "$(nproc)" \
         LDFLAGS="-Wl,--strip-all" \
-        CFLAGS="-fno-semantic-interposition -fno-builtin-malloc -fno-builtin-calloc -fno-builtin-realloc -fno-builtin-free -ljemalloc" \
+        CFLAGS="-fno-semantic-interposition -fno-builtin-malloc -fno-builtin-calloc -fno-builtin-realloc -fno-builtin-free" \
 # set thread stack size to 1MB so we don't segfault before we hit sys.getrecursionlimit()
 # https://github.com/alpinelinux/aports/commit/2026e1259422d4e0cf92391ca2d3844356c649d0
         EXTRA_CFLAGS="-DTHREAD_STACK_SIZE=0x100000" \
@@ -151,9 +150,6 @@ RUN cd /usr/local/bin \
     && ln -s python3 python \
     && ln -s python3-config python-config
 
-# if this is called "PIP_VERSION", pip explodes with "ValueError: invalid truth value '<VERSION>'"
-ENV PYTHON_PIP_VERSION 20.2.4
-
 RUN set -ex; \
     \
     apk add --no-cache --virtual .fetch-deps openssl; \
@@ -165,7 +161,7 @@ RUN set -ex; \
     python get-pip.py \
         --disable-pip-version-check \
         --no-cache-dir \
-        "pip==$PYTHON_PIP_VERSION" \
+        pip==${PIP_VERSION} \
     ; \
     pip --version; \
     \
