@@ -9,7 +9,7 @@
         "i386": "i386/debian:"
     },
     "args": {
-        "BASHIO_VERSION": "v0.0.2",
+        "BASHIO_VERSION": "0.0.2",
         "TEMPIO_VERSION": "2021.05.0",
         "S6_OVERLAY_VERSION": "2.1.0.2"
     },
