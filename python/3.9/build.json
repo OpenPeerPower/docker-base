@@ -1,6 +1,6 @@
 {
     "image": "openpeerpower/{arch}-base-python",
-    "shadow_repository": "ghcr.io/open-peer-power",
+    "shadow_repository": "ghcr.io/openpeerpower",
     "build_from": {
         "aarch64": "openpeerpower/aarch64-base:",
         "armv7": "openpeerpower/armv7-base:",
