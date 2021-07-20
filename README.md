@@ -5,7 +5,7 @@ It is recommended to use these as a base for your own Open Peer Power Add-ons.
 
 Using these images as a base for other Docker projects is, however, not recommended.
 
-The image include [S6-Overlay](https://github.com/just-containers/s6-overlay), [Bashio](https://github.com/oppio-addons/bashio) and [TempIO](https://github.com/openpeerpower/tempio).
+The image include [S6-Overlay](https://github.com/just-containers/s6-overlay), [Bashio](https://github.com/oppio-addons/bashio) and [TempIO](https://github.com/home-assistant/tempio).
 
 ## Base images
 
