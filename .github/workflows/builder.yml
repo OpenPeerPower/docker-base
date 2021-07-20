@@ -97,7 +97,7 @@ jobs:
         fi
     
     - name: Build base image
-      uses: openpeerpower/builder@latest
+      uses: openpeerpower/builder@2021.7.3
       with:
         args: |
           $BUILD_ARGS \
@@ -143,7 +143,7 @@ jobs:
         fi
     
     - name: Build base image
-      uses: openpeerpower/builder@latest
+      uses: openpeerpower/builder@2021.7.3
       with:
         args: |
           $BUILD_ARGS \
@@ -190,7 +190,7 @@ jobs:
         fi
     
     - name: Build base image
-      uses: openpeerpower/builder@latest
+      uses: openpeerpower/builder@2021.7.3
       with:
         args: |
           $BUILD_ARGS \
@@ -236,7 +236,7 @@ jobs:
         fi
     
     - name: Build base image
-      uses: openpeerpower/builder@latest
+      uses: openpeerpower/builder@2021.7.3
       with:
         args: |
           $BUILD_ARGS \
@@ -284,7 +284,7 @@ jobs:
         fi
     
     - name: Build base image
-      uses: openpeerpower/builder@latest
+      uses: openpeerpower/builder@2021.7.3
       with:
         args: |
           $BUILD_ARGS \
